@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:latest
 
 WORKDIR '/app'
 
@@ -10,6 +10,8 @@ RUN npm install express
 
 EXPOSE 3000
 
-# ENV SECRET_WORD
+ARG SECRET_WORD
+
+ENV SECRET_WORD $SECRET_WORD
 
 CMD ["npm", "start"]

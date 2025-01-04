@@ -4,18 +4,6 @@ resource "aws_ecs_cluster" "main" {
     name = "gonchquest-cluster"
 }
 
-# data "template_file" "gonchquest_app" {
-#     template = file("./templates/ecs/gonchquest_app.json.tpl")
-
-#     vars = {
-#         app_image      = var.app_image
-#         app_port       = var.app_port
-#         fargate_cpu    = var.fargate_cpu
-#         fargate_memory = var.fargate_memory
-#         aws_region     = var.aws_region
-#     }
-# }
-
 resource "aws_ecs_task_definition" "app" {
     family                   = "gonchquest-app-task"
     network_mode             = "awsvpc"
@@ -39,11 +27,11 @@ resource "aws_ecs_task_definition" "app" {
       }
     ]
     DEFINITION
-    execution_role_arn       = "${aws_iam_role.ecs_task_execution_role_name.arn}"
+    execution_role_arn = "${aws_iam_role.ecs_task_execution_role_name.arn}"
 }
 
 resource "aws_iam_role" "ecs_task_execution_role_name" {
-    name               = var.ecs_task_execution_role_name
+    name = var.ecs_task_execution_role_name
     assume_role_policy = "${data.aws_iam_policy_document.ecs_task_execution_role_policy_document.json}"
 }
 

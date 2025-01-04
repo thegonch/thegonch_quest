@@ -20,10 +20,10 @@ variable "ecs_task_execution_role_name" {
     default = "gonchQuestECSTaskExecutionRole"
 }
 
-variable "ecs_auto_scale_role_name" {
-    description = "ECS auto scale role name"
-    default = "gonchQuestECSAutoScaleRole"
-}
+# variable "ecs_auto_scale_role_name" {
+#     description = "ECS auto scale role name"
+#     default = "gonchQuestECSAutoScaleRole"
+# }
 
 variable "az_count" {
     description = "Number of AZs to cover in a given region"
@@ -32,13 +32,12 @@ variable "az_count" {
 
 variable "app_image" {
     description = "Docker image to run in the ECS cluster"
-    default = "node:10"
+    default = "node:latest"
 }
 
 variable "app_port" {
-    description = "Port exposed by the docker image to redirect traffic to"
+    description = "Port exposed by the docker image to redirect traffic to, in this case express"
     default = 3000
-
 }
 
 variable "app_count" {
@@ -51,11 +50,16 @@ variable "health_check_path" {
 }
 
 variable "fargate_cpu" {
-    description = "Fargate instance CPU units to provision (1 vCPU = 1024 CPU units)"
+    description = "Fargate CPU units (where 1 vCPU = 1024 CPU units)"
     default = "1024"
 }
 
 variable "fargate_memory" {
-    description = "Fargate instance memory to provision (in MiB)"
+    description = "Fargate provisioned memory (in MiB)"
     default = "2048"
+}
+
+variable "domain" {
+    description = "Domain name to use for the ACM certificate"
+    default = "gonchquest.com"  
 }
