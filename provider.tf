@@ -11,7 +11,14 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      # vversion = "5.82.2" # latest version as of 2025-01-01, pin to maintain stability
+      version = "5.82.2" # latest version as of 2025-01-01, pin to maintain stability
     }
   }
+}
+
+data "aws_caller_identity" "current" {
+}
+
+locals {
+  account_id = data.aws_caller_identity.current.account_id
 }

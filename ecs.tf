@@ -4,6 +4,10 @@ resource "aws_ecs_cluster" "main" {
     name = "gonchquest-cluster"
 }
 
+data "aws_secretsmanager_secret" "sensitive_secret_word" {
+  name = "gonchquest/secret_word"
+}
+
 resource "aws_ecs_task_definition" "app" {
     family                   = "gonchquest-app-task"
     network_mode             = "awsvpc"
@@ -14,7 +18,7 @@ resource "aws_ecs_task_definition" "app" {
     [
       {
         "name": "gonchquest-app",
-        "image": "${aws_ecr_repository.gonchquest_ecr_repo.repository_url}",
+        "image": "${local.account_id}.dkr.ecr.${var.aws_region}.amazonaws.com/${var.app_image}",
         "essential": true,
         "portMappings": [
           {
@@ -23,7 +27,13 @@ resource "aws_ecs_task_definition" "app" {
           }
         ],
         "memory": ${var.fargate_memory},
-        "cpu": ${var.fargate_cpu}
+        "cpu": ${var.fargate_cpu},
+        "secrets": [
+          {
+            "name": "SECRET_WORD",
+            "valueFrom": "${data.aws_secretsmanager_secret.sensitive_secret_word.arn}"
+          }
+        ]
       }
     ]
     DEFINITION

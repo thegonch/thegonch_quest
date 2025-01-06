@@ -20,11 +20,6 @@ variable "ecs_task_execution_role_name" {
     default = "gonchQuestECSTaskExecutionRole"
 }
 
-# variable "ecs_auto_scale_role_name" {
-#     description = "ECS auto scale role name"
-#     default = "gonchQuestECSAutoScaleRole"
-# }
-
 variable "az_count" {
     description = "Number of AZs to cover in a given region"
     default = "2"
@@ -32,7 +27,7 @@ variable "az_count" {
 
 variable "app_image" {
     description = "Docker image to run in the ECS cluster"
-    default = "node:latest"
+    default = "gonchquest-ecr-repo:latest"
 }
 
 variable "app_port" {
@@ -61,5 +56,5 @@ variable "fargate_memory" {
 
 variable "domain" {
     description = "Domain name to use for the ACM certificate"
-    default = "gonchquest.com"  
+    default = "gonchquest.com"
 }
