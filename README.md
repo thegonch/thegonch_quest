@@ -98,10 +98,10 @@ terraform plan -out tf.plan
 terraform apply --auto-approve tf.plan
 ```
 4. The output of the above will include the ALB's hostname. Copy and navigate to that in your browser to see the results. Note it may take a few minutes for the website to be fully available. You should be able to verify the following:
-   1. The secret word both as an initial result of the index page AND lower down where it is revealed via an environment variable (this is also accessible through the ALB's hostname followed by `/secret_word').
-   2. The detection of using AWS and specifically ECS as the container service. As part of this, it may not be able to determine that a container is being used because of the nature of Fargate. (this is also accessible through the ALB's hostname followed by `aws` and `/docker' respectively).
-   3. The detection of the Application Load Balancer. (this is also accessible through the ALB's hostname followed by `/loadbalanced').
-   4. The detection of TLS (https) via the ACM certificate. (this is also accessible through the ALB's hostname followed by `/tls').
+   1. The secret word both as an initial result of the index page AND lower down where it is revealed via an environment variable (this is also accessible through the ALB's hostname followed by `/secret_word`).
+   2. The detection of using AWS and specifically ECS as the container service. As part of this, it may not be able to determine that a container is being used because of the nature of Fargate. (this is also accessible through the ALB's hostname followed by `aws` and `/docker` respectively).
+   3. The detection of the Application Load Balancer. (this is also accessible through the ALB's hostname followed by `/loadbalanced`).
+   4. The detection of TLS (https) via the ACM certificate. (this is also accessible through the ALB's hostname followed by `/tls`).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
