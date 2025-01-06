@@ -1,5 +1,4 @@
 # Configure the backend for the terraform state file.
-# backend.tf
 terraform {
 
    backend "s3" {

@@ -1,5 +1,3 @@
-# variables.tf
-
 # Define the variables that will be used in the configuration
 
 variable "aws_access_key" {

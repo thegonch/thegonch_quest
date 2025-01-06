@@ -1,6 +1,5 @@
-# security.tf
+# Define security groups for the ALB and ECS tasks
 
-# ALB security Group: Edit to restrict access to the application
 resource "aws_security_group" "lb" {
     name        = "gonchquest-load-balancer-security-group"
     description = "controls access to the ALB"

@@ -1,4 +1,4 @@
-# network.tf
+# Create a VPC with public and private subnets in multiple AZs along with NAT gateways for the private subnets.
 
 # Fetch AZs in the current region
 data "aws_availability_zones" "available" {

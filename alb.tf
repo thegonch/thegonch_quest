@@ -1,4 +1,4 @@
-# alb.tf
+# Create an Application Load Balancer (ALB) and a target group for the ALB.
 
 resource "aws_alb" "main" {
     name        = "gonchquest-load-balancer"

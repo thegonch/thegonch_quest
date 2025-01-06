@@ -1,4 +1,4 @@
-  # ecs.tf
+# Configure ECS Fargate Cluster, Task Definition, and Service
 
 resource "aws_ecs_cluster" "main" {
     name = "gonchquest-cluster"
@@ -48,7 +48,6 @@ resource "aws_iam_role" "ecs_task_execution_role_name" {
 data "aws_iam_policy_document" "ecs_task_execution_role_policy_document" {
     statement {
         actions = ["sts:AssumeRole"]
-
         principals {
             type        = "Service"
             identifiers = ["ecs-tasks.amazonaws.com"]
