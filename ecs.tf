@@ -43,6 +43,7 @@ resource "aws_ecs_task_definition" "app" {
 resource "aws_iam_role" "ecs_task_execution_role_name" {
     name = var.ecs_task_execution_role_name
     assume_role_policy = "${data.aws_iam_policy_document.ecs_task_execution_role_policy_document.json}"
+    force_detach_policies = true
 }
 
 data "aws_iam_policy_document" "ecs_task_execution_role_policy_document" {
@@ -55,9 +56,36 @@ data "aws_iam_policy_document" "ecs_task_execution_role_policy_document" {
     }
 }
 
-resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-attachment" {
+data "aws_iam_policy_document" "ecs_task_execution_role_policy" {
+    statement {
+      actions = ["secretsmanager:GetSecretValue"]
+      resources = ["${data.aws_secretsmanager_secret.sensitive_secret_word.arn}"]
+    }
+}
+
+resource "aws_iam_policy" "ecs_task_execution_role_policy" {
+    name        = "ecs_task_execution_role_policy"
+    description = "Allow ECS Task Execution Role to access Secrets Manager"
+    policy      = jsonencode({
+        Version = "2012-10-17"
+        Statement = [
+            {
+                Effect   = "Allow"
+                Action   = "secretsmanager:GetSecretValue"
+                Resource = "${data.aws_secretsmanager_secret.sensitive_secret_word.arn}"
+            }
+        ]
+    })
+}
+
+resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-attachment-aws-role" {
     policy_arn ="arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
     role       = "${aws_iam_role.ecs_task_execution_role_name.name}"
+}
+
+resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-attachment" {
+    policy_arn = aws_iam_policy.ecs_task_execution_role_policy.arn
+    role       = aws_iam_role.ecs_task_execution_role_name.name
 }
 
 resource "aws_ecs_service" "main" {
