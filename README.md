@@ -21,6 +21,8 @@
   </ol>
 </details>
 
+<img width="1437" alt="gonchquest_main" src="https://github.com/user-attachments/assets/378fde1e-6cba-4cf0-9e3a-ea72769e4be0" />
+
 The following describes how to execute the "gonchquest" version of the Rearc quest project. This version of the quest project hosts a Node.js express webserver in AWS ECS Fargate for simplicity and ease of use for infrastructure management.
 
 ## Overview
@@ -99,10 +101,24 @@ terraform apply --auto-approve tf.plan
 ```
 4. The output of the above will include the ALB's hostname. Copy and navigate to that in your browser to see the results. Note it may take a few minutes for the website to be fully available. You should be able to verify the following:
    1. The secret word both as an initial result of the index page AND lower down where it is revealed via an environment variable (this is also accessible through the ALB's hostname followed by `/secret_word`).
-   2. The detection of using AWS and specifically ECS as the container service. As part of this, it may not be able to determine that a container is being used because of the nature of Fargate. (this is also accessible through the ALB's hostname followed by `aws` and `/docker` respectively).
-   3. The detection of the Application Load Balancer. (this is also accessible through the ALB's hostname followed by `/loadbalanced`).
-   4. The detection of TLS (https) via the ACM certificate. (this is also accessible through the ALB's hostname followed by `/tls`).
+     <img width="983" alt="gonchquest_secretword" src="https://github.com/user-attachments/assets/290bfd74-ea67-45cb-a09f-9c5ea27e5eff" />
 
+   2. The detection of using AWS and specifically ECS as the container service. As part of this, it may not be able to determine that a container is being used because of the nature of Fargate. (this is also accessible through the ALB's hostname followed by `/aws` and `/docker` respectively).
+     <img width="822" alt="gonchquest_aws" src="https://github.com/user-attachments/assets/26d42028-29aa-4cac-b2a2-20427f96f60b" />
+
+     <img width="911" alt="gonchquest_docker" src="https://github.com/user-attachments/assets/5d9706db-7437-4f86-97a2-fd4d48845ccd" />
+
+   3. The detection of the Application Load Balancer. (this is also accessible through the ALB's hostname followed by `/loadbalanced`).
+     <img width="860" alt="gonchquest_loadbalanced" src="https://github.com/user-attachments/assets/b82e9f63-5269-49c2-8f28-1b499b5227d4" />
+
+   4. The detection of TLS (https) via the ACM certificate. (this is also accessible through the ALB's hostname followed by `/tls`).
+     <img width="435" alt="gonchquest_tls" src="https://github.com/user-attachments/assets/6848c897-b5a2-44df-8232-bbb9584af786" />
+  
+     <img width="1228" alt="gonchquest_tls2" src="https://github.com/user-attachments/assets/10c672f4-298b-4ca1-a4a2-fd603bfaf2b9" />
+
+     <img width="717" alt="gonchquest_tls3" src="https://github.com/user-attachments/assets/cb9e9877-57f3-4386-b363-1f00d1b4ed5b" />
+
+    
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTACT -->
